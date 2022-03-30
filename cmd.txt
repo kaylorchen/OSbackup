@@ -1,0 +1,1 @@
+kvm --bios /usr/share/qemu/OVMF.fd -net none -drive format=raw,file=disk.img -serial stdio -m 4G -cpu host -smp 2

@@ -5,14 +5,28 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 time=$(date +%Y-%m+%d)
-user=$(whoami)
+user=${SUDO_USER}
 
-rootfs_tar=/home/${user}/ubuntu_rootfs@${time}.tar.gz
-home_tar=/home/${user}/ubuntu_home@${time}.tar.gz
+rootfs_tar=$(pwd)/ubuntu_rootfs@${time}.tar.gz
+home_tar=$(pwd)/ubuntu_home@${time}.tar.gz
 cd /
 echo "tar a rootfs package:${rootfs_tar}"
-sudo tar -cvpzf ${rootfs_tar} --exclude=/proc --exclude=/tmp --exclude=/home --exclude=/lost+found --exclude=/media --exclude=/mnt --exclude=/run /
+sudo tar -cvpzf ${rootfs_tar} \
+--exclude=/boot/efi \
+--exclude=/proc \
+--exclude=/tmp \
+--exclude=/home \
+--exclude=/lost+found \
+--exclude=/media \
+--exclude=/mnt \
+--exclude=/sys \
+--exclude=/dev \
+--exclude=/var/log \
+--exclude=/var/cache/apt/archives \
+--exclude=/run /
 
 echo "tar a home package: ${home_tar}"
 sudo tar -cvpzf ${home_tar} --exclude=${home_tar} /home
+
+echo "------------------------"
 

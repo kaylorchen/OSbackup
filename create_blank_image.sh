@@ -56,7 +56,9 @@ sudo mount /dev/loop100p1 rootfs/boot/efi
 
 echo "Installing grub"
 sudo grub-install --target=x86_64-efi --efi-directory=rootfs/boot/efi --removable --boot-directory=rootfs/boot --bootloader-id=grub /dev/loop100
-sudo grub-mkconfig -o rootfs/boot/grub/grub.cfg
+# sudo grub-mkconfig -o rootfs/boot/grub/grub.cfg
+
+sudo bash base.sh rootfs
 
 echo "Umounting loopback device"
 sudo umount rootfs/boot/efi

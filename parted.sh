@@ -3,16 +3,20 @@ if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit
 fi
-if [ -z ${1} ]; then
-    echo Pls add the 2nd para,: ./parted.sh /dev/xxxx
+
+echo $DEV
+if [ ! -n "${DEV}" ] ; then
+    echo "error, DEV is empty"
     exit
 fi
-device=${1}
+
+device=${DEV}
 ls ${device}
 if [ $? -ne 0 ] ;then
     echo ${device} does not exist.
     exit
 fi
+
 total_sectors=$(sudo fdisk -l ${device} | grep sectors | grep /dev | awk -F ',' '{print $3}' | awk '{print $1}')
 start_sector=2048
 end_sector=$(expr $total_sectors \- 34)
@@ -21,7 +25,7 @@ mid_sector_right=$(expr $mid_sector_left \+ 1)
 echo "total_sectors=${total_sectors}, start_sector=${start_sector}, \
 mid_sector_left=${mid_sector_left}, mid_sector_right=${mid_sector_right},\
 end_sector=${end_sector}"
-# exit
+
 echo "${device} will be formatted"
 read -p "Do you want to continue? [N/y] " confirm
 if [[ ${confirm} == "y" ]]; then
@@ -44,27 +48,27 @@ if [[ ${confirm} == "y" ]]; then
     sudo mkfs.ext4 /dev/loop100p2
     sudo mkfs.ext4 /dev/loop100p3
 
-    echo "Create a rootfs mount point"
-    sudo mkdir rootfs
-
-    echo "Mounting disk image rootfs partition"
-    sudo mount /dev/loop100p2 rootfs
-
-    echo "Create a efi mount point"
-    sudo mkdir -p rootfs/boot/efi
-
-    echo "Mounting disk image efi partition"
-    sudo mount /dev/loop100p1 rootfs/boot/efi
-
-    echo "Installing grub"
-    sudo grub-install --target=x86_64-efi --efi-directory=rootfs/boot/efi --removable --boot-directory=rootfs/boot --bootloader-id=grub /dev/loop100
-    sudo grub-mkconfig -o rootfs/boot/grub/grub.cfg
-
-    echo "Umounting loopback device"
-    sudo umount rootfs/boot/efi
-    sudo umount rootfs
-    sudo losetup -d /dev/loop100
-    sudo rm rootfs -rf
+#    echo "Create a rootfs mount point"
+#    sudo mkdir rootfs
+#
+#    echo "Mounting disk image rootfs partition"
+#    sudo mount /dev/loop100p2 rootfs
+#
+#    echo "Create a efi mount point"
+#    sudo mkdir -p rootfs/boot/efi
+#
+#    echo "Mounting disk image efi partition"
+#    sudo mount /dev/loop100p1 rootfs/boot/efi
+#
+#    echo "Installing grub"
+#    sudo grub-install --target=x86_64-efi --efi-directory=rootfs/boot/efi --removable --boot-directory=rootfs/boot --bootloader-id=grub /dev/loop100
+#    sudo grub-mkconfig -o rootfs/boot/grub/grub.cfg
+#
+#    echo "Umounting loopback device"
+#    sudo umount rootfs/boot/efi
+#    sudo umount rootfs
+#    sudo losetup -d /dev/loop100
+#    sudo rm rootfs -rf
 
     sudo parted -s ${device} p
     sudo fdisk -l ${device}

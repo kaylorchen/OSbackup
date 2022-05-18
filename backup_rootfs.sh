@@ -10,7 +10,8 @@ user=${SUDO_USER}
 rootfs_tar=$(pwd)/ubuntu_rootfs@${time}.tar.gz
 cd /
 echo "tar a rootfs package:${rootfs_tar}"
-sudo tar -cvpzf ${rootfs_tar} \
+sudo tar -cvpzf ${rootfs_tar}  \
+--exclude=/boot/grub \
 --exclude=/boot/efi \
 --exclude=/proc \
 --exclude=/tmp \

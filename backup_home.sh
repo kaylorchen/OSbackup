@@ -10,7 +10,9 @@ user=${SUDO_USER}
 home_tar=$(pwd)/ubuntu_home@${time}.tar.gz
 
 echo "tar a home package: ${home_tar}"
-sudo tar -cvpzf ${home_tar} --exclude=${home_tar} /home
-
+sudo tar -cvpzf ${home_tar} --exclude=${home_tar} \
+--exclude=/home/${user}/.cache \
+/home/${user}/.[!.]*
+sudo sync
 echo "------------------------"
 

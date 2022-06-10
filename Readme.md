@@ -27,7 +27,7 @@ sudo tar -cvpzf ${home_tar} --exclude=${home_tar} \
 本项目使用的是ubuntu20.04.4的安装盘作为恢复启动系统，其他安装盘并未测试。制作启动盘请自行谷歌
 
 ## 预备工作
-把本项目和硬件备份的文件放到另一个U盘中（U盘的分区如果是windows分区，建议使用vfat文件系统，因为传统的fat系统最大支持4G文件）。等安装盘启动之后，使用try Ubuntu进入系统。
+把本项目和硬件备份的文件放到另一个U盘中（U盘的分区如果是windows分区，建议使用exfat文件系统，因为传统的fat系统最大支持4G文件）。等安装盘启动之后，使用try Ubuntu进入系统。
 插入备份U盘。这里我们默认需要把系统安装到/dev/nvme0n1上,打开终端，设置环境变量DEV=/dev/nvme0n1（根据你的具体情况设置相应的环境变量）
 ```bash
 export DEV=/dev/nvme0n1

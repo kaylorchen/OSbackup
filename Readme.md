@@ -30,9 +30,8 @@ sudo tar -cvpzf ${home_tar} --exclude=${home_tar} \
 把本项目和硬件备份的文件放到另一个U盘中（U盘的分区如果是windows分区，建议使用exfat文件系统，因为传统的fat系统最大支持4G文件）。等安装盘启动之后，使用try Ubuntu进入系统。
 插入备份U盘。这里我们默认需要把系统安装到/dev/nvme0n1上,打开终端，设置环境变量DEV=/dev/nvme0n1（根据你的具体情况设置相应的环境变量）
 ```bash
+sudo su root
 export DEV=/dev/nvme0n1
-sudo passwd root #设置root密码
-su #切换到root用户
 ```
 
 ## 分区

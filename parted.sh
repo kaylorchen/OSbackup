@@ -45,8 +45,8 @@ if [[ ${confirm} == "y" ]]; then
 
     echo "Formatting"
     sudo mkfs.fat -F 32 /dev/loop100p1
-    sudo mkfs.ext4 /dev/loop100p2
-    sudo mkfs.ext4 /dev/loop100p3
+    sudo mkfs.ext4 -F /dev/loop100p2
+    sudo mkfs.ext4 -F /dev/loop100p3
 
 #    echo "Create a rootfs mount point"
 #    sudo mkdir rootfs

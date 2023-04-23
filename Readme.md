@@ -8,7 +8,7 @@
 
 ## 备份
 
-克隆该项目，运行备份脚本
+克隆该项目，运行备份脚本, 进入到仓库文件夹
 ```bash
 sudo bash backup_rootfs.sh
 sudo bash backup_home.sh

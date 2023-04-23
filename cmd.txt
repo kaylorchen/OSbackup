@@ -1,3 +1,4 @@
 kvm --bios /usr/share/qemu/OVMF.fd -net none -drive format=raw,file=disk.img -serial stdio -m 4G -cpu host -smp 2
 
 sudo qemu-system-x86_64 -bios OVMF.fd -m 1024 -hda /dev/sda
+qemu-system-x86_64 -drive format=raw,file=disk.img -bios /Users/kaylor/Downloads/disk/OVMF.fd

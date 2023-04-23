@@ -58,8 +58,8 @@ sudo mount /dev/loop100p1 rootfs/boot/efi
 
 echo "Installing grub"
 sudo grub-install --target=x86_64-efi --efi-directory=rootfs/boot/efi --removable --boot-directory=rootfs/boot --bootloader-id=grub /dev/loop100
-sudo grub-mkconfig -o rootfs/boot/grub/grub.cfg
-tree rootfs/boot/
+# sudo grub-mkconfig -o rootfs/boot/grub/grub.cfg
+# tree rootfs/boot/
 
 # sudo bash base.sh rootfs
 
@@ -72,5 +72,5 @@ sudo rm rootfs -rf
 
 sudo parted -s disk.img p
 sudo fdisk -l disk.img
-rm disk.img.gz
-gzip disk.img
+# rm disk.img.gz
+# gzip disk.img

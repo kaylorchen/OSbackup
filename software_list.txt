@@ -1,1 +1,11 @@
-grub-efi
+grub-efi      
+parted
+tree 
+nload 
+iptables
+libiw-dev
+parted
+alsa-tools
+curl
+vim
+zsh

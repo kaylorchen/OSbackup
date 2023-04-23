@@ -8,9 +8,11 @@ time=$(date +%Y-%m+%d)
 user=${SUDO_USER}
 
 rootfs_tar=$(pwd)/ubuntu_rootfs@${time}.tar.gz
+exclude_dir=$(pwd)
 cd /
 echo "tar a rootfs package:${rootfs_tar}"
 sudo tar -cvpzf ${rootfs_tar}  \
+--exclude=${exclude_dir} \
 --exclude=/boot/grub \
 --exclude=/boot/efi \
 --exclude=/proc \
@@ -26,4 +28,3 @@ sudo tar -cvpzf ${rootfs_tar}  \
 --exclude=/run /
 
 echo "------------------------"
-

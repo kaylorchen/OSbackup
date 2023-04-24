@@ -27,7 +27,7 @@ echo 'apt update
 apt upgrade -y
 '|bash ch-mount.sh -m $ROOTFS
 
-echo 'apt install curl ssh gnupg gnupg1 gnupg2 net-tools wireless-tools ifupdown ethtool iputils-ping bash-completion pciutils usbutils dbus dhcpcd-dbus psmisc alsa-base vim language-pack-en-base sudo  rsyslog  htop lsb-release grub-efi iw wpasupplicant hostapd udev rsync -y
+echo 'apt install resolvconf curl ssh gnupg gnupg1 gnupg2 net-tools wireless-tools ifupdown ethtool iputils-ping bash-completion pciutils usbutils dbus dhcpcd-dbus psmisc alsa-base vim language-pack-en-base sudo  rsyslog  htop lsb-release grub-efi iw wpasupplicant hostapd udev rsync -y
 '|bash ch-mount.sh -m $ROOTFS
 
 echo configure user files.
@@ -46,10 +46,14 @@ echo "allow-hotplug eth0" >> /etc/network/interfaces.d/eth0
 echo "iface eth0 inet dhcp"  >> /etc/network/interfaces.d/eth0
 echo "allow-hotplug eth1" >> /etc/network/interfaces.d/eth1
 echo "iface eth1 inet dhcp"  >> /etc/network/interfaces.d/eth1
+echo "nameserver 114.114.114.114" >> /etc/resolvconf/resolv.conf.d/tail
 echo set ts=4 >>/etc/vim/vimrc
 echo set expandtab >>/etc/vim/vimrc
 echo set nu >>/etc/vim/vimrc
 echo colorscheme desert >> /etc/vim/vimrc
+echo set relativenumber >> /etc/vim/vimrc
+echo paste >> /etc/vim/vimrc
+echo encoding=utf8 >> /etc/vim/vimrc
 mv /etc/apt/sources.list /etc/apt/sources.list.old
 touch /etc/apt/sources.list
 apt update

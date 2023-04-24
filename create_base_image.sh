@@ -41,6 +41,11 @@ sudo ls -l rootfs/boot/
 sudo ls -l rootfs/lib/modules/
 sudo sync
 echo "GRUB_DISABLE_OS_PROBER=true" >> rootfs/etc/default/grub
+sed -i -e "s/GRUB_TIMEOUT=0/GRUB_TIMEOUT=10/g" rootfs/etc/default/grub
+sed -i -e "s/quiet//g" rootfs/etc/default/grub
+sed -i -e "s/splash//g" rootfs/etc/default/grub
+sed -i -e "s/hidden/menu/g" rootfs/etc/default/grub
+sed -i -e "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"net.ifnames=0 biosdevname=0\"/g" rootfs/etc/default/grub
 cat rootfs/etc/default/grub
 
 echo "Update grub"

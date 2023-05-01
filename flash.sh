@@ -27,6 +27,12 @@ if [[ "$format" == "Y" || "$format" == "y" ]]; then
       umount $line
     done
   fi
-  dd if=${image} of=${dev}
+  if [ "${image##*.}"x = "gz"x ]; then
+    echo "gunzip and dd"
+    gunzip -c ${image} | dd of=${dev}
+  else
+    echo "dd"
+    dd if=${image} of=${dev}
+  fi
 
 fi

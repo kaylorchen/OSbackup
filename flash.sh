@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#Check if this is run with sudo, and exit otherwise
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit
+fi
+dev=${1}
+image=${2}
+
+read -p "Do you want to format ${dev}? [N/y]: " format
+if [[ "$format" == "Y" || "$format" == "y" ]]; then
+
+  echo "device is ${dev}, and image is ${image}"
+
+  ls ${image} >/dev/null 2>&1
+  if [ $? != "0" ]; then
+    echo "no such file: $image"
+    exit
+  fi
+
+  df | grep ${dev} >/dev/null 2>&1
+  if [ $? = "0" ]; then
+    mount_list=$(df | grep ${dev} | awk -F ' ' '{ print $1}')
+    for line in $mount_list; do
+      echo "umounting $line"
+      umount $line
+    done
+  fi
+  dd if=${image} of=${dev}
+
+fi

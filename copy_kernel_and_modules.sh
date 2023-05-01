@@ -5,7 +5,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 cur_dir=$(pwd)
-ver=$(ls -l /boot | grep 'vmlinuz ->' | awk -F 'vmlinuz-' '{print $2}')
+# ver=$(ls -l /boot | grep 'vmlinuz ->' | awk -F 'vmlinuz-' '{print $2}')
+ver=$(uname -r)
 echo "kernel version is $ver"
 mkdir -p linux/kernel
 

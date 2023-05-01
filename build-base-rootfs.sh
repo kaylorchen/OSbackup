@@ -27,7 +27,7 @@ echo 'apt update
 apt upgrade -y
 '|bash ch-mount.sh -m $ROOTFS
 
-echo 'apt install resolvconf curl ssh gnupg gnupg1 gnupg2 net-tools wireless-tools ifupdown ethtool iputils-ping bash-completion pciutils usbutils dbus dhcpcd-dbus psmisc alsa-base vim language-pack-en-base sudo  rsyslog  htop lsb-release grub-efi iw wpasupplicant hostapd udev rsync -y
+echo 'apt install tree resolvconf curl ssh gnupg gnupg1 gnupg2 net-tools wireless-tools ifupdown ethtool iputils-ping bash-completion pciutils usbutils dbus dhcpcd-dbus psmisc alsa-base vim language-pack-en-base sudo  rsyslog  htop lsb-release grub-efi iw wpasupplicant hostapd udev rsync -y
 '|bash ch-mount.sh -m $ROOTFS
 
 echo configure user files.

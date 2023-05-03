@@ -1,0 +1,8 @@
+[Unit]
+Description=robot image install service
+
+[Service]
+ExecStart=/bin/echo "This is a test"
+
+[Install]
+WantedBy=multi-user.target

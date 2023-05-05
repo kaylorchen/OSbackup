@@ -52,8 +52,8 @@ echo set expandtab >>/etc/vim/vimrc
 echo set nu >>/etc/vim/vimrc
 echo colorscheme desert >> /etc/vim/vimrc
 echo set relativenumber >> /etc/vim/vimrc
-echo paste >> /etc/vim/vimrc
-echo encoding=utf8 >> /etc/vim/vimrc
+echo set paste >> /etc/vim/vimrc
+echo set encoding=utf8 >> /etc/vim/vimrc
 mv /etc/apt/sources.list /etc/apt/sources.list.old
 touch /etc/apt/sources.list
 apt update

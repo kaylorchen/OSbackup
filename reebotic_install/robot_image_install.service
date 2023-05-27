@@ -2,7 +2,7 @@
 Description=robot image install service
 
 [Service]
-ExecStart=/bin/echo "This is a test"
+ExecStart=/bin/bash /install/reebotic_install/reebotic.sh
 
 [Install]
 WantedBy=multi-user.target

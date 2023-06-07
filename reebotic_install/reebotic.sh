@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 15
 
 #Check if this is run with sudo, and exit otherwise
 if [ "$EUID" -ne 0 ]; then
@@ -14,6 +15,14 @@ echo CUR_DIR is $CUR_DIR
 AUDIO_PATH=${CUR_DIR}/reebotic_audio
 
 source ${CUR_DIR}/config.sh
+
+if ls ${CUR_DIR}/turn_on_robot_speaker; then
+  echo "Opening robot speaker"
+  ${CUR_DIR}/turn_on_robot_speaker
+else
+  echo "turn_on_robot_speaker: no such this file"
+fi
+
 # 设置音量
 amixer -c ${SOUND_CARD_NUMBER} set ${SOUND_CARD_CTRL_PARAMETER} ${SOUND_CARD_VOLUME}
 
@@ -42,7 +51,7 @@ sudo bash ${CUR_DIR}/flash.sh ${DEVICE} ${image} &
 echo "Sleep for 5 seconds"
 sleep 5
 while true; do
-  if ps aux | grep "dd *of=${DEVICE}" | grep -v "grep" ; then
+  if ps aux | grep "dd *of=${DEVICE}" | grep -v "grep"; then
     echo "dd is running"
     aplay -Dplughw:${SOUND_CARD_NUMBER},${SOUND_CARD_SUBNUMBER} ${AUDIO_PATH}/flashing.wav
     sleep 10
